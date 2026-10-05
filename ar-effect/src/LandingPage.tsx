@@ -1,12 +1,5 @@
-import {
-  ArrowUpRight,
-  Camera,
-} from "lucide-react";
-
 type Props = {
-  onOpenProject: (
-    path: string
-  ) => void;
+  onOpenProject: (path: string) => void;
 };
 
 const projects = [
@@ -60,17 +53,13 @@ export default function LandingPage({
   return (
     <main className="relative min-h-screen overflow-hidden bg-black text-white">
 
-      {/* ====================================
-          BACKGROUND BLOBS
-          ==================================== */}
+      {/* BACKGROUND */}
 
       <div className="blob blob-pink" />
       <div className="blob blob-violet" />
       <div className="blob blob-orange" />
 
-      {/* ====================================
-          NAV
-          ==================================== */}
+      {/* NAV */}
 
       <nav
         className="
@@ -78,7 +67,6 @@ export default function LandingPage({
           left-0
           right-0
           top-0
-
           z-50
 
           flex
@@ -120,10 +108,8 @@ export default function LandingPage({
         className="
           relative
           z-10
-
           mx-auto
           max-w-7xl
-
           px-5
           sm:px-8
         "
@@ -138,7 +124,6 @@ export default function LandingPage({
             flex
             min-h-screen
             items-center
-
             pb-20
             pt-32
           "
@@ -157,7 +142,9 @@ export default function LandingPage({
                 text-zinc-500
               "
             >
-              <Camera size={15} />
+              <span className="text-base">
+                ◉
+              </span>
 
               Camera-based experiments
             </div>
@@ -165,7 +152,6 @@ export default function LandingPage({
             <h1
               className="
                 mt-6
-
                 max-w-6xl
 
                 text-6xl
@@ -174,14 +160,24 @@ export default function LandingPage({
                 tracking-[-0.05em]
 
                 sm:text-8xl
-
                 md:text-[10rem]
               "
             >
               AR EFFECT
               <br />
 
-              <span className="animate-gradient bg-gradient-to-r from-pink-400 via-violet-400 to-orange-400 bg-[length:200%] bg-clip-text text-transparent">
+              <span
+                className="
+                  animate-gradient
+                  bg-gradient-to-r
+                  from-pink-400
+                  via-violet-400
+                  to-orange-400
+                  bg-[length:200%]
+                  bg-clip-text
+                  text-transparent
+                "
+              >
                 REPOSITORY
               </span>
             </h1>
@@ -267,7 +263,6 @@ export default function LandingPage({
             py-24
 
             md:grid-cols-[1fr_2fr]
-
             md:py-32
           "
         >
@@ -363,11 +358,9 @@ export default function LandingPage({
               <h2
                 className="
                   mt-4
-
                   text-4xl
                   font-bold
                   tracking-tight
-
                   sm:text-6xl
                 "
               >
@@ -381,7 +374,6 @@ export default function LandingPage({
                 hidden
                 text-xs
                 text-zinc-600
-
                 sm:block
               "
             >
@@ -406,15 +398,11 @@ export default function LandingPage({
 
                 return (
                   <button
-                    key={
-                      project.number
-                    }
+                    key={project.number}
                     type="button"
                     disabled={!active}
                     onClick={() => {
-                      if (
-                        project.path
-                      ) {
+                      if (project.path) {
                         onOpenProject(
                           project.path
                         );
@@ -422,11 +410,8 @@ export default function LandingPage({
                     }}
                     className={`
                       group
-
                       relative
-
                       w-full
-
                       overflow-hidden
 
                       rounded-[2rem]
@@ -452,7 +437,7 @@ export default function LandingPage({
                     `}
                   >
 
-                    {/* HOVER GLOW */}
+                    {/* GLOW */}
 
                     <div
                       className={`
@@ -466,7 +451,6 @@ export default function LandingPage({
                         w-64
 
                         rounded-full
-
                         blur-3xl
 
                         opacity-0
@@ -477,11 +461,9 @@ export default function LandingPage({
                         group-hover:opacity-20
 
                         ${
-                          project.accent ===
-                          "pink"
+                          project.accent === "pink"
                             ? "bg-pink-500"
-                            : project.accent ===
-                                "violet"
+                            : project.accent === "violet"
                               ? "bg-violet-500"
                               : "bg-orange-500"
                         }
@@ -508,7 +490,6 @@ export default function LandingPage({
                         className="
                           text-5xl
                           font-bold
-
                           text-zinc-700
 
                           transition-colors
@@ -539,19 +520,15 @@ export default function LandingPage({
                               text-3xl
                               font-semibold
                               tracking-tight
-
                               sm:text-4xl
                             "
                           >
-                            {
-                              project.title
-                            }
+                            {project.title}
                           </h3>
 
                           <span
                             className="
                               rounded-full
-
                               border
                               border-white/10
 
@@ -559,16 +536,13 @@ export default function LandingPage({
                               py-1
 
                               text-[9px]
-
                               uppercase
                               tracking-[0.2em]
 
                               text-zinc-500
                             "
                           >
-                            {
-                              project.status
-                            }
+                            {project.status}
                           </span>
 
                         </div>
@@ -586,9 +560,7 @@ export default function LandingPage({
                             sm:text-base
                           "
                         >
-                          {
-                            project.description
-                          }
+                          {project.description}
                         </p>
 
                         <div
@@ -614,7 +586,6 @@ export default function LandingPage({
                                   py-2
 
                                   text-[10px]
-
                                   uppercase
                                   tracking-[0.15em]
 
@@ -642,29 +613,15 @@ export default function LandingPage({
                           text-sm
                           text-zinc-500
 
-                          transition-all
+                          transition-colors
                           duration-300
 
                           group-hover:text-white
                         "
                       >
                         {active
-                          ? "Explore"
+                          ? "Explore ↗"
                           : "Coming soon"}
-
-                        {active && (
-                          <ArrowUpRight
-                            size={18}
-                            className="
-                              transition-transform
-                              duration-300
-
-                              group-hover:translate-x-1
-                              group-hover:-translate-y-1
-                            "
-                          />
-                        )}
-
                       </div>
 
                     </div>
@@ -686,14 +643,12 @@ export default function LandingPage({
         <section
           className="
             relative
-
             overflow-hidden
 
             border-y
             border-white/10
 
             py-24
-
             sm:py-40
           "
         >
@@ -708,7 +663,6 @@ export default function LandingPage({
 
               text-[10rem]
               font-black
-
               leading-none
 
               text-white/[0.025]
@@ -723,7 +677,6 @@ export default function LandingPage({
             className="
               relative
               z-10
-
               max-w-5xl
             "
           >
@@ -788,29 +741,20 @@ export default function LandingPage({
 
           <div>
             AR EFFECT REPOSITORY
-            <span className="mx-2">
-              /
-            </span>
+            <span className="mx-2">/</span>
             MINSEY NGUYEN
           </div>
 
           <a
-            href="https://github.com/chauminh24"
+            href="https://github.com/chauminh24/first-ar-project"
             target="_blank"
             rel="noopener noreferrer"
             className="
-              flex
-              items-center
-              gap-2
-
               transition-colors
-
               hover:text-white
             "
           >
-            <i className="fab fa-github" style={{ fontSize: '15px' }} />
-
-            GitHub
+            GitHub ↗
           </a>
 
         </footer>

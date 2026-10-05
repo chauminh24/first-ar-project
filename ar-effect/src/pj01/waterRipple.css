@@ -1,0 +1,54 @@
+/* ==========================================
+   WATER RIPPLE PAGE
+========================================== */
+
+.water-page {
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+/* ==========================================
+   CAMERA SOURCE
+
+   Hidden because WebGL reads this video
+   and turns it into a texture.
+========================================== */
+
+.camera-source {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    object-fit: cover;
+}
+
+
+/* ==========================================
+   WEBGL OUTPUT
+
+   This is the actual visible camera.
+========================================== */
+
+.water {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    display: block;
+}

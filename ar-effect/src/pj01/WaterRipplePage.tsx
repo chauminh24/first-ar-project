@@ -6,6 +6,8 @@ import {
 
 import { ArrowLeft } from "lucide-react";
 
+import "./waterRipple.css";
+
 import { HandTracker } from "./handTracker";
 import { WaterRipple } from "./waterRipple";
 
@@ -109,7 +111,7 @@ export default function WaterRipplePage({
                 setLoading(false);
 
                 // =====================================
-                // LOOP
+                // HAND TRACKING LOOP
                 // =====================================
 
                 function loop() {
@@ -119,11 +121,12 @@ export default function WaterRipplePage({
                     ) {
                         return;
                     }
+
                     const video =
-                        videoRef.current
+                        videoRef.current;
 
                     if (!video) {
-                        return
+                        return;
                     }
 
                     const finger =
@@ -157,16 +160,16 @@ export default function WaterRipplePage({
 
                         if (
                             now -
-                            lastRippleTime >
-                            65 &&
+                                lastRippleTime >
+                                65 &&
                             distance >
-                            0.0015
+                                0.0015
                         ) {
                             const strength =
                                 Math.min(
                                     1,
                                     0.20 +
-                                    distance * 12
+                                        distance * 12
                                 );
 
                             ripple.addRipple(
@@ -186,7 +189,9 @@ export default function WaterRipplePage({
                     }
 
                     animationFrame =
-                        requestAnimationFrame(loop);
+                        requestAnimationFrame(
+                            loop
+                        );
                 }
 
                 loop();
@@ -201,6 +206,10 @@ export default function WaterRipplePage({
         }
 
         start();
+
+        // =====================================
+        // CLEANUP
+        // =====================================
 
         return () => {
             cancelAnimationFrame(
@@ -222,94 +231,111 @@ export default function WaterRipplePage({
     return (
         <main className="water-page">
 
-            {/* CAMERA SOURCE */}
+            {/* =====================================
+                CAMERA SOURCE
+
+                This video is ONLY used as the
+                WebGL texture source.
+
+                It must NOT be visible.
+            ===================================== */}
 
             <video
                 ref={videoRef}
-                className="camera"
+                className="camera-source"
                 autoPlay
                 playsInline
                 muted
             />
 
-            {/* WEBGL */}
+            {/* =====================================
+                WEBGL CAMERA
+
+                This is the ONLY visible camera.
+                The webcam image is rendered here
+                with the water distortion.
+            ===================================== */}
 
             <canvas
                 ref={canvasRef}
                 className="water"
             />
 
-            {/* BACK */}
+            {/* =====================================
+                BACK BUTTON
+            ===================================== */}
 
             <button
                 onClick={onBack}
                 className="
-          fixed
-          left-6
-          top-6
-          z-50
+                    fixed
+                    left-6
+                    top-6
+                    z-50
 
-          flex
-          items-center
-          gap-2
+                    flex
+                    items-center
+                    gap-2
 
-          rounded-full
+                    rounded-full
 
-          border
-          border-white/10
+                    border
+                    border-white/10
 
-          bg-black/40
+                    bg-black/40
 
-          px-5
-          py-3
+                    px-5
+                    py-3
 
-          text-sm
-          text-white
+                    text-sm
+                    text-white
 
-          backdrop-blur-xl
+                    backdrop-blur-xl
 
-          transition-all
-          duration-300
+                    transition-all
+                    duration-300
 
-          hover:-translate-x-1
-          hover:border-white/30
-        "
+                    hover:-translate-x-1
+                    hover:border-white/30
+                "
             >
                 <ArrowLeft size={16} />
 
                 Repository
             </button>
 
-            {/* STATUS */}
+            {/* =====================================
+                STATUS
+            ===================================== */}
 
             <div
                 className="
-          fixed
-          bottom-6
-          left-1/2
+                    fixed
+                    bottom-6
+                    left-1/2
 
-          z-50
+                    z-50
 
-          -translate-x-1/2
+                    -translate-x-1/2
 
-          rounded-full
+                    rounded-full
 
-          border
-          border-white/10
+                    border
+                    border-white/10
 
-          bg-black/40
+                    bg-black/40
 
-          px-5
-          py-3
+                    px-5
+                    py-3
 
-          text-[10px]
+                    text-[10px]
 
-          tracking-[0.2em]
+                    tracking-[0.2em]
 
-          text-white
+                    text-white
 
-          backdrop-blur-xl
-        "
+                    backdrop-blur-xl
+                "
             >
                 {loading
                     ? "INITIALIZING CAMERA"
