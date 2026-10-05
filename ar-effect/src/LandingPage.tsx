@@ -82,15 +82,28 @@ export default function LandingPage({
           mix-blend-difference
         "
       >
-        <div
+        <a
           className="
+            inline-flex
+            items-center
+            gap-3
+
             text-xs
             font-medium
-            tracking-[0.25em]
+            tracking-[0.08em]
           "
+          href="https://minseynguyen.com"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          MINSEY NGUYEN
-        </div>
+          <img
+            src="/logo.png"
+            alt=""
+            aria-hidden="true"
+            className="h-8 w-8 rounded-full"
+          />
+          <span>Minsey Nguyen</span>
+        </a>
 
         <div
           className="
@@ -739,10 +752,18 @@ export default function LandingPage({
           "
         >
 
-          <div>
-            AR EFFECT REPOSITORY
-            <span className="mx-2">/</span>
-            MINSEY NGUYEN
+          <div className="flex items-center gap-2">
+            <span>AR EFFECT REPOSITORY</span>
+            <span aria-hidden="true">/</span>
+            <span className="inline-flex items-center gap-2">
+              <img
+                src="/logo.png"
+                alt=""
+                aria-hidden="true"
+                className="h-5 w-5 rounded-full"
+              />
+              <span>Minsey Nguyen</span>
+            </span>
           </div>
 
           <a
