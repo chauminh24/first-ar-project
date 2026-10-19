@@ -30,7 +30,7 @@ const projects = [
     "Creative Coding",
     "Interactive 3D",
   ],
-  path: "/sl-playground",
+  path: "/slimey-playground",
   status: "WIP",
   accent: "violet",
 },
