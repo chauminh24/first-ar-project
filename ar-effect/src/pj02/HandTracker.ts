@@ -42,12 +42,19 @@ class OneEuroFilter {
   private x = 0;
   private dx = 0;
   private t = -1;
+  private readonly minCutoff: number;
+  private readonly beta: number;
+  private readonly dCutoff: number;
 
   constructor(
-    private readonly minCutoff: number,
-    private readonly beta: number,
-    private readonly dCutoff = 1
-  ) {}
+    minCutoff: number,
+    beta: number,
+    dCutoff = 1
+  ) {
+    this.minCutoff = minCutoff;
+    this.beta = beta;
+    this.dCutoff = dCutoff;
+  }
 
   private static alpha(dt: number, cutoff: number) {
     const tau = 1 / (2 * Math.PI * cutoff);
