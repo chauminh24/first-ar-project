@@ -19,18 +19,21 @@ const projects = [
   },
 
   {
-    number: "02",
-    title: "Coming Soon",
-    description:
-      "Another experiment is currently taking shape.",
-    tags: [
-      "Computer Vision",
-      "Creative Coding",
-    ],
-    path: null,
-    status: "WIP",
-    accent: "violet",
-  },
+  number: "02",
+  title: "Slimey Playground",
+  description:
+    "An interactive 3D experiment where hand tracking and computer vision let you pinch, stretch, and deform a living slime surface in real time.",
+  tags: [
+    "Computer Vision",
+    "Hand Tracking",
+    "Three.js",
+    "Creative Coding",
+    "Interactive 3D",
+  ],
+  path: "/sl-playground",
+  status: "WIP",
+  accent: "violet",
+},
 
   {
     number: "03",

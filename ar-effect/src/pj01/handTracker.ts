@@ -18,6 +18,7 @@ export type FingerPoint = {
 export class HandTracker {
   private landmarker: HandLandmarker | null = null
   private lastVideoTime = -1
+  private closed = false
 
   async initialize() {
     const vision =
@@ -25,7 +26,11 @@ export class HandTracker {
         WASM_PATH
       )
 
-    this.landmarker =
+    if (this.closed) {
+      return
+    }
+
+    const landmarker =
       await HandLandmarker.createFromOptions(
         vision,
         {
@@ -43,6 +48,13 @@ export class HandTracker {
           minTrackingConfidence: 0.5,
         }
       )
+
+    if (this.closed) {
+      landmarker.close()
+      return
+    }
+
+    this.landmarker = landmarker
   }
 
   detect(
@@ -273,6 +285,7 @@ export class HandTracker {
   }
 
   close() {
+    this.closed = true
     this.landmarker?.close()
     this.landmarker = null
   }

@@ -83,10 +83,14 @@ export default function WaterRipplePage({
         let lastRippleTime = 0;
         let lastX = 0.5;
         let lastY = 0.5;
+        let abandonCameraStream = false;
+        const acquiredStream: { current: MediaStream | null } = {
+            current: null,
+        };
 
         try {
-            const stream =
-                await navigator.mediaDevices.getUserMedia({
+            const cameraRequest =
+                navigator.mediaDevices.getUserMedia({
                     video: {
                         facingMode: "user",
 
@@ -105,7 +109,26 @@ export default function WaterRipplePage({
                     },
 
                     audio: false,
+                }).then((stream) => {
+                    acquiredStream.current = stream;
+
+                    if (
+                        abandonCameraStream ||
+                        !mountedRef.current
+                    ) {
+                        stream.getTracks().forEach((track) => track.stop());
+                    }
+
+                    return stream;
                 });
+
+            const tracker = new HandTracker();
+            trackerRef.current = tracker;
+
+            const [stream] = await Promise.all([
+                cameraRequest,
+                tracker.initialize(),
+            ]);
 
             if (!mountedRef.current) {
                 stream.getTracks().forEach((track) => track.stop());
@@ -123,14 +146,6 @@ export default function WaterRipplePage({
 
             video.srcObject = stream;
             await video.play();
-
-            if (!mountedRef.current) {
-                return;
-            }
-
-            const tracker = new HandTracker();
-            trackerRef.current = tracker;
-            await tracker.initialize();
 
             if (!mountedRef.current) {
                 return;
@@ -193,6 +208,10 @@ export default function WaterRipplePage({
                 error
             );
 
+            abandonCameraStream = true;
+            acquiredStream.current
+                ?.getTracks()
+                .forEach((track) => track.stop());
             streamRef.current
                 ?.getTracks()
                 .forEach((track) => track.stop());
